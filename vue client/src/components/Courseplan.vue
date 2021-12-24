@@ -3,7 +3,7 @@
 <v-data-table
     :headers="headers"
     
-    :items="course"
+    :items='course'
     sort-by="calories"
     class="elevation-1"
   >
@@ -174,7 +174,7 @@ export default {
       editedItem: {
         // name: '',
         // calories: 0,
-        name: null,
+        name: '',
         description: null,
         level:"",
         subjects:"",

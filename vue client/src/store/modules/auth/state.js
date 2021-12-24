@@ -73,8 +73,8 @@ const state = {
   // levels:[],
   course: [],
 
-  itemLevel: ['level1', 'level2', 'level3', 'level4'],
-  itemSubjects: ['subjects1', 'subjects2', 'subjects3'],
+  // itemLevel: ['level1', 'level2', 'level3', 'level4'],
+  // itemSubjects: ['subjects1', 'subjects2', 'subjects3'],
 
 };
 

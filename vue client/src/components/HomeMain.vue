@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 <template>
   <div id="head">
     <v-app-bar app>
@@ -126,12 +126,13 @@
                               ></v-text-field>
                             </v-col>
 
-                            <v-col cols="12" sm="8">
+                            <v-col cols="12" sm="8"> 
                               <v-autocomplete
-                                :items="itemLevel"
+                                :items=itemLevel
+                                
                                 label="Level*"
                                 v-model="clevel"
-                                multiple
+                                
                               ></v-autocomplete>
                             </v-col>
                                <v-col cols="12" sm="8">
@@ -139,8 +140,57 @@
                                 :items="itemSubjects"
                                 label="Subjects*"
                                 v-model="csub"
-                                multiple
+   
                               ></v-autocomplete>
+<!-- demo purpose start 24.12.2021-->
+                              <v-combobox
+                                    clearable
+                                    hide-selected
+                                    :item="items"
+                                     
+                                ></v-combobox>
+        <v-select
+          v-model="select"
+          
+          :items="exmp"
+          
+          label="Select-xyz"
+          persistent-hint
+          return-object
+          single-line
+        ></v-select>
+
+
+<!-- another exmpl -->
+
+
+
+        <v-container fluid>
+    <v-row align="center">
+      <v-col cols="6">
+        <v-subheader>
+          Custom items
+        </v-subheader>
+      </v-col>
+
+      <v-col cols="6">
+        <v-select
+          v-model="select"
+          
+          :items="itemLevel"
+          item-text="select"
+          item-value="name"
+          label="Level"
+          persistent-hint
+          return-object
+          single-line
+        ></v-select>
+      </v-col>
+    </v-row>
+  </v-container>
+
+
+<!-- demo purpose end 24.12.2021-->
                             </v-col>
                             
                           </v-row>
@@ -216,17 +266,18 @@
           <h2>Welcome Note!!!</h2>
           <h3>Hi There,</h3>
          
-          <h4>
+          <!-- <h4>
               <li v-for="courses in course" :key="courses">
             {{ courses }}
               </li>
             
-            </h4>
+            </h4> -->
 
           <!-- If using vue-router -->
           <br />
           <div class="main-content">
             <router-view />
+           
           </div>
         </v-container>
       </v-main>
@@ -238,6 +289,9 @@
     </v-app>
   </div>
 </template>
+
+
+
 <script>
 import { mapState, mapActions } from "vuex";
 export default {
@@ -257,26 +311,44 @@ export default {
       // this.initialize()
       
 
-      this.actionCourseGet()
+      this.actionCourseGet(),
+      this.actionLavelGet(),
+      this.actionSubjectsGet()
+
     },
 
-  data: () => ({
-    dialog: false,
-    return:{
+  data () {
+
+     return{
+       exmp:[],
+      dialog: false,
+      select: { state: 'Florida', abbr: 'FL' },
+        items: [
+          { state: 'Florida', abbr: 'FL' },
+          { state: 'Georgia', abbr: 'GA' },
+          { state: 'Nebraska', abbr: 'NE' },
+          { state: 'California', abbr: 'CA' },
+          { state: 'New York', abbr: 'NY' },
+        ],
       cname: " ",
     cdesc: " ",
     clevel: "",
-    csub: ""
-    },
-    cname: null,
-    cdesc: " ",
-    clevel: "",
-    csub: ""
-  }),
-  methods: {
-    ...mapActions(["actionCourseGet"]),
-
+    csub: "",
+    
+    }
    
+  },
+ 
+    
+   
+    
+
+  methods: {
+    ...mapActions(["actionCourseGet","actionLavelGet","actionSubjectsGet"]),
+
+      example(){
+        this.exmp=this.itemLevel
+      },
 
     addCourse() {
        debugger;

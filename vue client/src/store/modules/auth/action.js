@@ -45,7 +45,7 @@ async myActionPass(context,value){
  
   const response = await axios.get("http://localhost:1111/getCourse")
   console.log(response)
-  commit('CRS_GET_MUT', response.data.levels)
+  commit('CRS_GET_MUT', response.data.course)
  },
 
  async actionLavel(context,value){

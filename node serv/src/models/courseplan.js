@@ -5,8 +5,8 @@ const ObjectId = Schema.ObjectId;
 const CourseSchem = new Schema({
     name: { type: String },
     description: { type: String },
-    level: { type: Array },
-    subjects: { type: Array },
+    level: { type: String },
+    subjects: { type: String },
 
 });
 
