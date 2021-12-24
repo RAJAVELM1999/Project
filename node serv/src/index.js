@@ -4,16 +4,67 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 require("./config/db");
-const {Level} = require("./models/level");
+const { Level } = require("./models/level");
 const { Subjects } = require("./models/subjects");
 const { Skills } = require("./models/skills");
+const { Course } = require("./models/courseplan");
 
 app.get('/', (req, res) => {
     console.log('/');
     return res.send('Hello world included With Welcome');
 });
 
-app.get('/getLevels',async (req, res)  => {
+//  Express Methods for Level it include the 
+// POST => create Data
+// Get => acess the data which are inserted using an POST method
+// PUT => Put Method is On of the expression that help to update the existing content in an DB usin "findoneandupdate()" or findbyidanddelete() 
+// DELETE => Del Method in express whic is help to dele the existing data whic avilable in db using "fineoneanddelete()" or findbyidanddelete()
+
+// *** Starting of Course
+
+app.post('/addCourse', async (req, res) => {
+    console.log(req.body);
+
+    const course = await Course.create({
+        name: req.body.name,
+        description: req.body.description,
+        level: req.body.level,
+        subjects: req.body.subjects,
+    });
+    console.log('addCourse');
+
+    return res.json(course);
+})
+//below for Get => find()=============
+
+app.get('/getCourse', async (req, res) => {
+    console.log('/getCourse');
+    const course = await Course.find({});
+    console.log(course);
+
+    return res.json({
+        course: course
+    });
+})
+// *** Engind of Course
+
+// Below for post => create()=============================================================
+
+app.post('/addLevel', async (req, res) => {
+    console.log(req.body);
+
+    const level = await Level.create({
+        name: req.body.name,
+        type: req.body.type,
+        identifier: req.body.identifier,
+    });
+    console.log('addLevel');
+
+    return res.json(level);
+})
+//below for Get => find()====================================================================
+
+app.get('/getLevels', async (req, res) => {
     console.log('/getLevels');
     const levels = await Level.find({});
     console.log(levels);
@@ -22,6 +73,41 @@ app.get('/getLevels',async (req, res)  => {
         levels: levels
     });
 })
+
+//below for put => FindByIDAndUpdate() / FindOneAndUpdate()========================================
+
+app.put('/getLevels', async (req, res) => {
+    console.log('Updating Levels');
+    const levels = await Level.findOneAndUpdate({ name: "Rajavel" },
+        { name: "RAJAVEL M" },
+        { overwrite: false },
+        async (err, doc) =>
+            console.log(doc)
+    )
+    return res.json({
+        levels: levels
+    });
+
+})
+
+//below for Delete => FindByIDAndDelete() / FindOneAndDelete()========================================
+// app.delete('/getLevels',async(req,res)=>{
+//     console.log('Updating Levels');
+//     const levels= await Level.findByIdAndDelete({_id:"61b87a0d6c8ffe893f665b47"},
+
+//     function(err,doc){
+//         console.log(doc);
+//     })
+//     return res.json({
+//         levels: levels
+//     });
+
+// }
+
+
+
+
+
 
 // app.get('/getSubjects', (req, res) => {
 //     console.log('/getSubjects');
@@ -39,18 +125,7 @@ app.get('/getLevels',async (req, res)  => {
 //     });
 // })
 
-app.post('/addLevel', async (req, res) => {
-    console.log(req.body);
-    
-    const level = await Level.create({
-        name: req.body.name,
-        type: req.body.type,
-        identifier: req.body.identifier,
-    });
-    console.log('addLevel');
 
-    return res.json(level);
-})
 
 
 app.get('/getSubjects', async (req, res) => {
@@ -63,16 +138,16 @@ app.get('/getSubjects', async (req, res) => {
     return res.json({
         subjects: subjects
     });
-    
+
     // return res.json({
     //     subjects: [
     //         {
-                
+
     //            displayname: 'English',
     //             identifier: 'eng'
     //         },
     //         {
-                
+
     //             displayname: 'Computer Science',
     //              identifier: 'Cs'
     //          }
@@ -80,7 +155,7 @@ app.get('/getSubjects', async (req, res) => {
     //     ]
     // });
 })
-app.post('/addSubjects', async(req, res) => {
+app.post('/addSubjects', async (req, res) => {
     console.log(req.body);
 
     const subjects = await Subjects.create({
@@ -101,7 +176,7 @@ app.get('/getSkills', async (req, res) => {
     return res.json({
         skills: skills
     });
-   
+
 })
 app.post('/addSkills', async (req, res) => {
     console.log(req.body);
@@ -113,7 +188,7 @@ app.post('/addSkills', async (req, res) => {
     return res.json(skills);
 })
 
-const PORT = 7777;
+const PORT = 1111;
 app.listen(PORT, () => {
     console.log(`Server started in http://localhost:${PORT}`);
 });

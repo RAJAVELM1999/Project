@@ -16,8 +16,40 @@ async myActionPass(context,value){
    }
   
  },
+ 
+ async actionCourse(context,value){
+  
+  const response = await axios.post("http://localhost:1111/addCourse",
+         {
+           
+          name: value.obj1,
+          description: value.obj2,
+          level:value.obj3,
+          subjects:value.obj4
+        }
+        
+        // {
+        //   name: "rajav",
+        //   description: "welcome",
+        //   level:"level1",
+        //   subjects:"subjects1"
+        // },
+        );
+        
+        console.log(response);
+       
+        context.commit('CRS_POST_MUT',value);
+        // this.close(); 
+ },
+ async actionCourseGet({commit}){
+ 
+  const response = await axios.get("http://localhost:1111/getCourse")
+  console.log(response)
+  commit('CRS_GET_MUT', response.data.levels)
+ },
+
  async actionLavel(context,value){
-  const response = await axios.post("http://localhost:7777/addLevel",
+  const response = await axios.post("http://localhost:1111/addLevel",
          {
           name: value.obj1,
           type: value.obj2,
@@ -31,7 +63,7 @@ async myActionPass(context,value){
 
  async actionLavelGet({commit}){
  
-  const response = await axios.get("http://localhost:7777/getLevels")
+  const response = await axios.get("http://localhost:1111/getLevels")
 
   commit('LEV_GET_MUT', response.data.levels)
   // const val=response.data.levels;
@@ -55,7 +87,7 @@ async myActionPass(context,value){
 
 // async getUser({commit}) {
 //   try {
-//       const currentUser = await axios.post("http://localhost:7777/addLevel",{name:'rajavel',type:'new',identifier:'rv'})
+//       const currentUser = await axios.post("http://localhost:1111/addLevel",{name:'rajavel',type:'new',identifier:'rv'})
 //       console.log(currentUser)
 //       // commit(' LEV_POST_MUT', currentUser)
 //       // return currentUser
@@ -65,7 +97,7 @@ async myActionPass(context,value){
 //   }
 // },
 async actionSubjects(context,value){
-  const response = await axios.post("http://localhost:7777/addSubjects",
+  const response = await axios.post("http://localhost:1111/addSubjects",
          {
           displayname: value.obj1,
           identifier: value.obj2,
@@ -78,7 +110,7 @@ async actionSubjects(context,value){
  },
  async actionSubjectsGet({commit}){
  
-  const response = await axios.get("http://localhost:7777/getSubjects")
+  const response = await axios.get("http://localhost:1111/getSubjects")
 
   commit('SUB_GET_MUT', response.data.subjects)
  },
@@ -87,7 +119,7 @@ async actionSubjects(context,value){
 
 
  async actionSkills(context,value){
-  const response = await axios.post("http://localhost:7777/addSkills",
+  const response = await axios.post("http://localhost:1111/addSkills",
          {
           name: value.obj1,
           description: value.obj2,
@@ -100,7 +132,7 @@ async actionSubjects(context,value){
  },
  async actionSkillsGet({commit}){
  
-  const response = await axios.get("http://localhost:7777/getSkills")
+  const response = await axios.get("http://localhost:1111/getSkills")
 
   commit('SKILLS_GET_MUT', response.data.skills)
  },

@@ -8,7 +8,7 @@ import Level from "../components/Level.vue";
 import Subject from "../components/Subject.vue";
 import Skills from "../components/Skills.vue";
 import Sample from "../components/Sample.vue";
-
+import Courseplan from "../components/Courseplan.vue"
 
 Vue.use(VueRouter);
 
@@ -18,45 +18,50 @@ const routes = [
     name: "Login",
     component: Login,
   },
-  
+
   {
-    path:"/Register",
-    name:"Register",
+    path: "/Register",
+    name: "Register",
     component: Register,
-   
+
   },
   {
-    path:"/HomeMain",
-    name:"HomeMain",
+    path: "/HomeMain",
+    name: "HomeMain",
     component: HomeMain,
-    children:[
+    children: [
       {
-        path:"/Level",
-        name:"Level",
+        path: "/Level",
+        name: "Level",
         component: Level,
       },
       {
-        path:"/Skills",
-        name:"Skills",
+        path: "/Skills",
+        name: "Skills",
         component: Skills,
       },
       {
-        path:"/Subject",
-        name:"Subject",
+        path: "/Subject",
+        name: "Subject",
         component: Subject,
       },
-  ]
+      {
+        path: "/Courseplan",
+        name: "Courseplan",
+        component: Courseplan,
+      },
+    ]
   },
-  
-  
-  
+
+
+
   {
-    path:"/Sample",
-    name:"Sample",
+    path: "/Sample",
+    name: "Sample",
     component: Sample,
   },
-  
-  
+
+
 ];
 
 const router = new VueRouter({

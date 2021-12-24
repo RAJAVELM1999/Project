@@ -1,16 +1,19 @@
 <template>
-<div class="editcss">
-  <v-data-table
+<div>
+<v-data-table
     :headers="headers"
-    :items='subjectsget'
+    
+    :items="course"
     sort-by="calories"
     class="elevation-1"
   >
+
+  
     <template v-slot:top>
       <v-toolbar
         flat
       >
-        <v-toolbar-title>Subjects</v-toolbar-title>
+        <v-toolbar-title>Course plan</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -21,18 +24,10 @@
           v-model="dialog"
           max-width="500px"
         >
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              color="#66BB6A"
-              
-              dark
-              class="mb-2"
-              v-bind="attrs"
-              v-on="on"
-            >
-              <v-icon>mdi-plus</v-icon>
-            </v-btn>
-          </template>
+          <!-- <template v-slot:activator="{ on, attrs }">
+           
+          
+          </template> -->
           <v-card>
             <v-card-title>
               <span class="text-h5">{{ formTitle }}</span>
@@ -41,42 +36,35 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <!-- <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="editedItem.name"
-                      label=""
-                    ></v-text-field>
-                  </v-col> -->
-                  <!-- <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="editedItem.calories"
-                      label="Id"
-                    ></v-text-field>
-                  </v-col> -->
+                  
                   <v-col
+                    
                     cols="12" md="8"
                   >
                     <v-text-field
-                      v-model="editedItem.displayname"
-                      label="Display Name"
+                      v-model="editedItem.name"
+                      label="Name"
                     ></v-text-field>
                   </v-col>
-                  <v-col
-                   cols="12" md="8"
-                  >
+                  <v-col cols="12" md="8">
                     <v-text-field
-                      v-model="editedItem.identifier"
-                      label="Identifer"
+                      v-model="editedItem.description"
+                      label="Description"
                     ></v-text-field>
                   </v-col>
+                  <v-col cols="12" md="8">
+                    <v-text-field
+                      v-model="editedItem.level"
+                      label="Level"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" md="8">
+                    <v-text-field
+                      v-model="editedItem.subjects"
+                      label="Subjects"
+                    ></v-text-field>
+                  </v-col>
+                  
                   <!-- <v-col
                     cols="12"
                     sm="6"
@@ -103,7 +91,7 @@
               <v-btn
                 color="blue darken-1"
                 text
-                @click="save() + addSubjects()"
+                @click="save()"
               >
                 Save
               </v-btn>
@@ -125,8 +113,8 @@
     </template>
     <template v-slot:item.actions="{ item }">
       <v-icon
-      color="info"
         medium
+        color="info"
         class="mr-22"
         @click="editItem(item)"
       >
@@ -136,33 +124,38 @@
         color="red"
         medium
         @click="deleteItem(item)"
-        class="mr-2"
       >
         mdi-delete
       </v-icon>
+      
     </template>
     <template v-slot:no-data>
+     
       <v-btn
         color="primary"
-        @click="actionSubjectsGet"
+        @click="actionCourseGet"
       >
         Reset
       </v-btn>
+       
     </template>
+    
   </v-data-table>
-  </div>
+
+</div>
+  
+
 </template>
 
 <script>
 // import axios from 'axios'
-import { mapState, mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
-    name:'Subject',
+    name:'Courseplan',
     data: () => ({
-      subj:[],
       dialog: false,
       dialogDelete: false,
-       headers: [
+      headers: [
         // {
         //   text: 'Dessert (100g serving)',
         //   align: 'start',
@@ -170,25 +163,30 @@ export default {
         //   value: 'name',
         // },
         // { text: 'Id', value: 'calories' },
-        { text: 'Display Name ', value: 'displayname' },
-        { text: 'Identifier ', value: 'identifier' },
-       
+        { text: 'Name ', value: 'name' },
+        { text: 'Description ', value: 'description' },
+        { text: 'Level ', value: 'level' },
+        { text: 'Subjects ', value: 'subjects' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
-      // subjectsget: [],
+      // course: [],
       editedIndex: -1,
       editedItem: {
         // name: '',
         // calories: 0,
-        displayname: null,
-        identifier: null,
+        name: null,
+        description: null,
+        level:"",
+        subjects:"",
         // protein: 0,
       },
       defaultItem: {
         // name: '',
         // calories: 0,
-        displayname: "",
-        identifier: "",
+        name: "",
+        description:"",
+        level:"",
+        subjects:"",
         // protein: 0,
       },
     }),
@@ -197,14 +195,11 @@ export default {
       formTitle () {
         return this.editedIndex === -1 ? 'Add Item' : 'Edit Item'
       },
-       ...mapState({
-     
-      subjectsget: (state) => state.auth.subjectsget,
       
-     
-      
-               })
-      
+      ...mapState({
+          
+        course:(state)=> state.auth.course,
+      })
     },
 
     watch: {
@@ -218,58 +213,31 @@ export default {
 
     created () {
       // this.initialize(),
-      this.actionSubjectsGet()
+      
+      this.actionCourseGet()
     },
 
     methods: {
       ...mapActions([
-      'actionSubjectsGet',
-    ]),
-        addSubjects() {
-           
-        this.$store.dispatch('actionSubjects',
-      { 
-        obj0 : this.editedItem,
-        obj1 : this.editedItem.displayname,
-        obj2 : this.editedItem.identifier,
-        
-      })
-        // const response = await axios.post("http://localhost:1111/addSubjects",
-        //  {
-        //   displayname: this.editedItem.displayname,
-        //   identifier: this.editedItem.identifier
-        // });
-        //  this.subjectsget.push(this.editedItem);
-
-        // console.log(response);
-        this.close();
-      },
-      // async initialize () {
-      //   const response = await axios.get("http://localhost:1111/getSubjects")
-      //   // console.log(response.data);
-      //   this.subj = response.data.subjects;
-      //   // const myval1 = "rajavel";
-      //   // this.levels =' key checking hello'
-      //   this.subjectsget = this.subj;
-      //   },
-          
-       
+        'actionCourseGet'
+      ]),
+     
      
 
       editItem (item) {
-        this.editedIndex = this.subjectsget.indexOf(item)
+        this.editedIndex = this.course.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
       deleteItem (item) {
-        this.editedIndex = this.subjectsget.indexOf(item)
+        this.editedIndex = this.course.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialogDelete = true
       },
 
       deleteItemConfirm () {
-        this.subjectsget.splice(this.editedIndex, 1)
+        this.course.splice(this.editedIndex, 1)
         this.closeDelete()
       },
 
@@ -291,9 +259,9 @@ export default {
 
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.subjectsget[this.editedIndex], this.editedItem)
+          Object.assign(this.course[this.editedIndex], this.editedItem)
         } else {
-          this.subjectsget.push(this.editedItem)
+          this.course.push(this.editedItem)
         }
         this.close()
       },
@@ -303,19 +271,5 @@ export default {
 </script>
 
 <style>
-.mb-2{
-  width: 10;
-  border-radius: 50px;
-  
-}
-.mr-2{
-  size: 200px;
-}
-v-icon.mr-22{
-  color: info;
-}
-v-icon.mr-22 {
-  
-  color: info ;
-}
+
 </style>

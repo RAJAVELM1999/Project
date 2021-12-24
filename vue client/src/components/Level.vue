@@ -4,7 +4,7 @@
   <v-data-table
 
     :headers="headers"
-    :items='desserts'
+    :items='levelget'
     sort-by="calories"
     class="elevation-1"
   >
@@ -168,7 +168,7 @@ import {mapActions, mapState} from 'vuex'
 export default {
     name:'Level',
     data: () => ({
-      
+    
       dialog: false,
       dialogDelete: false,
       headers: [
@@ -185,7 +185,7 @@ export default {
         { text: 'Actions', value: 'actions', sortable: false },
       ],
       // levels:[],
-      // desserts: [],
+      // levelget: [],
       editedIndex: -1,
       editedItem: {
         // name: '',
@@ -210,7 +210,7 @@ export default {
       },
       ...mapState({
      
-      desserts: (state) => state.auth.desserts,
+      levelget: (state) => state.auth.levelget,
       // levels: (state) => state.auth.levels,
      
       
@@ -246,13 +246,13 @@ export default {
         obj3 : this.editedItem.identifier
       })
 
-      //   const response = await axios.post("http://localhost:7777/addLevel",
+      //   const response = await axios.post("http://localhost:1111/addLevel",
       //    {
       //     name: this.editedItem.name,
       //     type: this.editedItem.type,
       //     identifier: this.editedItem.identifier
       //   });
-      //    this.desserts.push(this.editedItem);
+      //    this.levelget.push(this.editedItem);
 
       //   console.log(response);
       //   this.close();
@@ -261,29 +261,29 @@ export default {
       // async initialize () {
 
        
-      //   const response = await axios.get("http://localhost:7777/getLevels")
+      //   const response = await axios.get("http://localhost:1111/getLevels")
       //   // console.log(response.data);
       //   this.levels = response.data.levels;
       //   // const myval1 = "rajavel";
       //   // this.levels =' key checking hello'
-      //   this.desserts = this.levels;
+      //   this.levelget = this.levels;
         
       // },
 
       editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
+        this.editedIndex = this.levelget.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
       deleteItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
+        this.editedIndex = this.levelget.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialogDelete = true
       },
 
       deleteItemConfirm () {
-        this.desserts.splice(this.editedIndex, 1)
+        this.levelget.splice(this.editedIndex, 1)
         this.closeDelete()
       },
 
@@ -304,7 +304,7 @@ export default {
       },
 
        save () {
-        //    const response = await axios.post("http://localhost:7777/addLevel",
+        //    const response = await axios.post("http://localhost:1111/addLevel",
         //  {
         //   name: this.editedItem.name,
         //   type: this.editedItem.type,
@@ -312,18 +312,18 @@ export default {
         // });
 
         if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+          Object.assign(this.levelget[this.editedIndex], this.editedItem)
       
         console.log(this.editItem);
         } 
         else {
-          this.desserts.push(this.editedItem)
+          this.levelget.push(this.editedItem)
         }
         this.close()
       },
 
     //   async getlevels() {
-    //    const response = await axios.get("http://localhost:7777/getLevels")
+    //    const response = await axios.get("http://localhost:1111/getLevels")
     //      this.levels = response.data.levels;
     // },
 

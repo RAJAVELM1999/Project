@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost:27017/rajavel')
+mongoose.connect('mongodb://localhost:27017/Today14dec')
     .then(() => {
         console.log("Mongoose connected to Db...");
     }).

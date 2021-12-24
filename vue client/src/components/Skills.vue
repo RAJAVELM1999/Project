@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="skillsget"
     sort-by="calories"
     class="elevation-1"
   >
@@ -177,7 +177,7 @@ export default {
        
         { text: 'Actions', value: 'actions', sortable: false },
       ],
-      // desserts: [],
+      // skillsget: [],
       editedIndex: -1,
       editedItem: {
         // name: '',
@@ -200,7 +200,7 @@ export default {
         return this.editedIndex === -1 ? 'Add Item' : 'Edit Item'
       },
       ...mapState({
-        desserts:(state)=> state.auth.desserts,
+        skillsget:(state)=> state.auth.skillsget,
       })
     },
 
@@ -215,7 +215,7 @@ export default {
 
     created () {
       // this.initialize(),
-      debugger;
+      
       this.actionSkillsGet()
     },
 
@@ -232,35 +232,35 @@ export default {
         obj2 : this.editedItem.description,
         
       })
-        // const response = await axios.post("http://localhost:7777/addSkills",
+        // const response = await axios.post("http://localhost:1111/addSkills",
         //  {
         //   name: this.editedItem.name,
         //   description: this.editedItem.description
         // });
-        //  this.desserts.push(this.editedItem);
+        //  this.skillsget.push(this.editedItem);
 
         // console.log(response);
         this.close();
       },
       // async initialize () {
-      //   const response = await axios.get("http://localhost:7777/getSkills");
-      //   this.desserts = response.data.skillls;
+      //   const response = await axios.get("http://localhost:1111/getSkills");
+      //   this.skillsget = response.data.skillls;
       // },
 
       editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
+        this.editedIndex = this.skillsget.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
       deleteItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
+        this.editedIndex = this.skillsget.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialogDelete = true
       },
 
       deleteItemConfirm () {
-        this.desserts.splice(this.editedIndex, 1)
+        this.skillsget.splice(this.editedIndex, 1)
         this.closeDelete()
       },
 
@@ -282,9 +282,9 @@ export default {
 
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+          Object.assign(this.skillsget[this.editedIndex], this.editedItem)
         } else {
-          this.desserts.push(this.editedItem)
+          this.skillsget.push(this.editedItem)
         }
         this.close()
       },
