@@ -136,10 +136,14 @@
                               ></v-autocomplete>
                             </v-col>
                                <v-col cols="12" sm="8">
+                                 {{itemSubjects}}
                               <v-autocomplete
                                 :items="itemSubjects"
                                 label="Subjects*"
                                 v-model="csub"
+                                
+                                item-text="displayname"
+                                item-value="identifier"
    
                               ></v-autocomplete>
 <!-- demo purpose start 24.12.2021-->

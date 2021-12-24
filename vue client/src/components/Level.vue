@@ -108,7 +108,7 @@
               <v-btn
                 color="blue darken-1"
                 text
-                @click="save() + addLevel()"
+                @click="save()"
               >
                 Save
               </v-btn>
@@ -237,14 +237,8 @@ export default {
     ]),
 
      addLevel() {
-      
-        this.$store.dispatch('actionLavel',
-      { 
-        obj0 : this.editedItem,
-        obj1 : this.editedItem.name,
-        obj2 : this.editedItem.type,
-        obj3 : this.editedItem.identifier
-      })
+      debugger
+        this.$store.dispatch('actionLavel', this.editedItem)
 
       //   const response = await axios.post("http://localhost:1111/addLevel",
       //    {
@@ -317,9 +311,12 @@ export default {
         console.log(this.editItem);
         } 
         else {
+          debugger
           this.levelget.push(this.editedItem)
         }
-        this.close()
+        this.close();
+
+        this.addLevel();
       },
 
     //   async getlevels() {
