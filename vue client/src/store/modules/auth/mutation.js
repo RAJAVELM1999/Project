@@ -32,7 +32,7 @@ const mutations = {
   },
   CRS_POST_MUT(state, value) {
 
-    state.course = value
+    state.course.push(value)
     // state.desserts.push({value:value})
   },
   CRS_GET_MUT(state, value) {
@@ -44,7 +44,8 @@ const mutations = {
   },
 
   LEV_POST_MUT(state, value) {
-    state.levelget = value.data
+
+    state.levelget.push(value)
     // state.desserts.push({value:value})
   },
 
@@ -59,7 +60,8 @@ const mutations = {
 
 
   SUB_POST_MUT(state, value) {
-    state.subjectsget = value
+
+    state.subjectsget.push(value)
     // state.desserts.push({value:value})
   },
   SUB_GET_MUT(state, value) {
@@ -74,7 +76,8 @@ const mutations = {
   // skills part start here
 
   SKILLS_POST_MUT(state, value) {
-    state.skillsget = value
+
+    state.skillsget.push(value)
 
   },
   SKILLS_GET_MUT(state, value) {

@@ -305,19 +305,20 @@ export default {
         //   identifier: this.editedItem.identifier
         // });
 
-        if (this.editedIndex > -1) {
-          Object.assign(this.levelget[this.editedIndex], this.editedItem)
+        // if (this.editedIndex > -1) {
+        //   Object.assign(this.levelget[this.editedIndex], this.editedItem)
       
-        console.log(this.editItem);
-        } 
-        else {
+        // console.log(this.editItem);
+        // } 
+        // else {
          
-          this.levelget=this.editedItem
-        }
+        //   // this.levelget=this.editedItem
+          
+        // }
         
         this.close();
 
-        this.addLevel();
+        this.addLevel  ();
       },
 
     //   async getlevels() {

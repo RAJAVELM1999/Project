@@ -103,7 +103,7 @@
               <v-btn
                 color="blue darken-1"
                 text
-                @click="save() + addSubjects()"
+                @click="save()"
               >
                 Save
               </v-btn>
@@ -227,13 +227,14 @@ export default {
     ]),
         addSubjects() {
            
-        this.$store.dispatch('actionSubjects',
-      { 
-        obj0 : this.editedItem,
-        obj1 : this.editedItem.displayname,
-        obj2 : this.editedItem.identifier,
+        this.$store.dispatch('actionSubjects',this.editedItem)
+
+      // { 
+      //   obj0 : 
+      //   obj1 : this.editedItem.displayname,
+      //   obj2 : this.editedItem.identifier,
         
-      })
+      // }
         // const response = await axios.post("http://localhost:2222/addSubjects",
         //  {
         //   displayname: this.editedItem.displayname,
@@ -289,13 +290,16 @@ export default {
         })
       },
 
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.subjectsget[this.editedIndex], this.editedItem)
-        } else {
-          this.subjectsget.push(this.editedItem)
-        }
-        this.close()
+      save () 
+      {
+        // if (this.editedIndex > -1) {
+        //   Object.assign(this.subjectsget[this.editedIndex], this.editedItem)
+        // } else {
+        //   this.subjectsget.push(this.editedItem)
+        // }
+        
+        this.close();
+        this.addSubjects();
       },
     },
 

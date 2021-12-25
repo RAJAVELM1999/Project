@@ -103,7 +103,7 @@
               <v-btn
                 color="blue darken-1"
                 text
-                @click="save() + addSkills()"
+                @click="save()"
               >
                 Save
               </v-btn>
@@ -224,14 +224,14 @@ export default {
         'actionSkillsGet'
       ]),
        addSkills() {
-        //  debugger;
-         this.$store.dispatch('actionSkills',
-      { 
-        obj0 : this.editedItem,
-        obj1 : this.editedItem.name,
-        obj2 : this.editedItem.description,
+       
+         this.$store.dispatch('actionSkills',this.editedItem)
+      // { 
+      //   obj0 : ,
+      //   obj1 : this.editedItem.name,
+      //   obj2 : this.editedItem.description,
         
-      })
+      // }
         // const response = await axios.post("http://localhost:2222/addSkills",
         //  {
         //   name: this.editedItem.name,
@@ -281,12 +281,9 @@ export default {
       },
 
       save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.skillsget[this.editedIndex], this.editedItem)
-        } else {
-          this.skillsget.push(this.editedItem)
-        }
-        this.close()
+        
+        this.close();
+        this.addSkills();
       },
     },
 

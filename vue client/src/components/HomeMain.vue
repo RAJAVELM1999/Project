@@ -114,14 +114,14 @@
                             <v-col cols="12" sm="8">
                               <v-text-field
                                 label="Name*"
-                                v-model="cname"
+                                v-model="editedItem.name"
                                 required
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="8">
                               <v-text-field
                                 label="Description"
-                                v-model="cdesc"
+                                v-model="editedItem.description"
                                 hint=""
                               ></v-text-field>
                             </v-col>
@@ -131,7 +131,7 @@
                                 :items=itemLevel
                                 
                                 label="Level*"
-                                v-model="clevel"
+                                v-model="editedItem.level"
                                 item-text="name"
                                 item-value="identifier"
                                 
@@ -142,62 +142,14 @@
                               <v-autocomplete
                                 :items="itemSubjects"
                                 label="Subjects*"
-                                v-model="csub"
+                                v-model="editedItem.subjects"
                                 
                                 item-text="displayname"
                                 item-value="identifier"
    
                               ></v-autocomplete>
                               
-<!-- demo purpose start 24.12.2021-->
-                              <!-- <v-combobox
-                                    clearable
-                                    hide-selected
-                                    :item="items"
-                                     
-                                ></v-combobox> -->
-        <!-- <v-select
-          v-model="select"
-          
-          :items="exmp"
-          
-          label="Select-xyz"
-          persistent-hint
-          return-object
-          single-line
-        ></v-select> -->
 
-
-<!-- another exmpl -->
-<!-- 
-
-
-        <v-container fluid>
-    <v-row align="center">
-      <v-col cols="6">
-        <v-subheader>
-          Custom items
-        </v-subheader>
-      </v-col>
-
-      <v-col cols="6">
-        <v-select
-          v-model="select"
-          
-          :items="itemLevel"
-          item-text="select"
-          item-value="name"
-          label="Level"
-          persistent-hint
-          return-object
-          single-line
-        ></v-select>
-      </v-col>
-    </v-row>
-  </v-container> -->
-
-
-<!-- demo purpose end 24.12.2021-->
                             </v-col>
                             
                           </v-row>
@@ -310,7 +262,7 @@ export default {
       itemLevel: (state) => state.auth.levelget,
       itemSubjects: (state) => state.auth.subjectsget,
       
-      course: (state) => state.auth.course,
+      // course: (state) => state.auth.course,
     }),
     
   },
@@ -337,10 +289,19 @@ export default {
           { state: 'California', abbr: 'CA' },
           { state: 'New York', abbr: 'NY' },
         ],
-      cname: " ",
-    cdesc: " ",
-    clevel: "",
-    csub: "",
+        editedItem: {
+     name: " ",
+    description: " ",
+    level: "",
+    subjects: "",
+    },
+   defaultItem: {
+     name: " ",
+    description: " ",
+    level: "",
+    subjects: "",
+    },
+
     
     }
    
@@ -356,17 +317,18 @@ export default {
       
 
     addCourse() {
-       
-      this.$store.dispatch("actionCourse", {
-        // obj0 : this.editedItem,
-        obj1: this.cname,
-        obj2: this.cdesc,
-        obj3: this.clevel,
-        obj4: this.csub,
-      }
       
-      );
-      this.dialog=false
+      this.$store.dispatch("actionCourse", this.editedItem);
+      
+      // {
+      //   // obj0 : this.editedItem,
+      //   obj1: this.cname,
+      //   obj2: this.cdesc,
+      //   obj3: this.clevel,
+      //   obj4: this.csub,
+      // }
+      this.dialog=false;
+       this.editedItem = Object.assign({}, this.defaultItem)
     },
   },
 };

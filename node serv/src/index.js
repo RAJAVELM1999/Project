@@ -49,7 +49,7 @@ app.get('/getCourse', async (req, res) => {
 // *** Engind of Course
 
 app.get('/updateCourse', async (req, res) => {
-    const course = await Course.find({});
+    const course = await Course.updateOne({})
 
 
 

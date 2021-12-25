@@ -1,15 +1,16 @@
+
  
- <template>
+ 
+  <template>
 <div>
-<v-data-table
+     <!-- <button @click="addLevel">Add temp</button> -->
+  <v-data-table
+
     :headers="headers"
-    
     :items='course'
     sort-by="calories"
     class="elevation-1"
   >
-
-  
     <template v-slot:top>
       <v-toolbar
         flat
@@ -19,16 +20,27 @@
           class="mx-4"
           inset
           vertical
-        ></v-divider>
+        >
+        </v-divider>
         <v-spacer></v-spacer>
-        <v-dialog
+        <v-dialog 
           v-model="dialog"
           max-width="500px"
         >
-          <!-- <template v-slot:activator="{ on, attrs }">
            
-          
-          </template> -->
+    
+          <template v-slot:activator="{ on, attrs }">
+                <v-btn
+              color="#66BB6A"
+              dark
+              class="mb-2"
+              v-bind="attrs"
+              v-on="on"
+              dialog=true
+            >
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+          </template>
           <v-card>
             <v-card-title>
               <span class="text-h5">{{ formTitle }}</span>
@@ -37,45 +49,51 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  
-                  <v-col
-                    
-                    cols="12" md="8"
-                  >
-                    <v-text-field
-                      v-model="editedItem.name"
-                      label="Name"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" md="8">
-                    <v-text-field
-                      v-model="editedItem.description"
-                      label="Description"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" md="8">
-                    <v-text-field
-                      v-model="editedItem.level"
-                      label="Level"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" md="8">
-                    <v-text-field
-                      v-model="editedItem.subjects"
-                      label="Subjects"
-                    ></v-text-field>
-                  </v-col>
-                  
                   <!-- <v-col
                     cols="12"
                     sm="6"
                     md="4"
                   >
                     <v-text-field
-                      v-model="editedItem.protein"
-                      label="Protein (g)"
+                      v-model="editedItem.name"
+                      label="Id"
                     ></v-text-field>
                   </v-col> -->
+                  <!-- <v-col
+                    cols="12"
+                    sm="6"
+                    md="4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.calories"
+                      label="Id"
+                    ></v-text-field>
+                  </v-col> -->
+                  <v-col
+                   cols="12" md="8"
+                  >
+                    <v-text-field
+                      v-model="editedItem.name"
+                      label="Name"
+                      
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12" md="8"
+                  >
+                    <v-text-field
+                      v-model="editedItem."
+                      label="Type"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col
+                    cols="12" md="8"
+                  >
+                    <v-text-field
+                      v-model="editedItem.identifier"
+                      label="Identifier"
+                    ></v-text-field>
+                  </v-col>
                 </v-row>
               </v-container>
             </v-card-text>
@@ -89,6 +107,7 @@
               >
                 Cancel
               </v-btn>
+              
               <v-btn
                 color="blue darken-1"
                 text
@@ -115,8 +134,8 @@
     <template v-slot:item.actions="{ item }">
       <v-icon
         medium
-        color="info"
         class="mr-22"
+        color="info"
         @click="editItem(item)"
       >
         mdi-pencil
@@ -128,32 +147,31 @@
       >
         mdi-delete
       </v-icon>
-      
     </template>
     <template v-slot:no-data>
-     
       <v-btn
         color="primary"
-        @click="actionCourseGet"
+        @click="actionLavelGet()"
       >
         Reset
       </v-btn>
-       
     </template>
-    
   </v-data-table>
-
-</div>
+  <!-- testing :
   
+  <h2>{{ levels }}</h2> -->
+</div>
 
 </template>
 
 <script>
+import {mapActions, mapState} from 'vuex'
 // import axios from 'axios'
-import { mapActions, mapState } from 'vuex'
+
 export default {
-    name:'Courseplan',
+    name:'Level',
     data: () => ({
+    
       dialog: false,
       dialogDelete: false,
       headers: [
@@ -165,42 +183,41 @@ export default {
         // },
         // { text: 'Id', value: 'calories' },
         { text: 'Name ', value: 'name' },
-        { text: 'Description ', value: 'description' },
-        { text: 'Level ', value: 'level' },
-        { text: 'Subjects ', value: 'subjects' },
+        { text: 'Type ', value: 'type' },
+        { text: 'Identifier', value: 'identifier' },
         { text: 'Actions', value: 'actions', sortable: false },
       ],
+      // levels:[],
       // course: [],
       editedIndex: -1,
       editedItem: {
         // name: '',
         // calories: 0,
-        name: '',
-        description: null,
-        level:"",
-        subjects:"",
-        // protein: 0,
+        name: "",
+        type: "",
+        identifier: "",
       },
       defaultItem: {
         // name: '',
-        // calories: 0,
+        // name: 0,
         name: "",
-        description:"",
-        level:"",
-        subjects:"",
-        // protein: 0,
+        type: "",
+        identifier: "",
       },
+      
     }),
 
     computed: {
       formTitle () {
         return this.editedIndex === -1 ? 'Add Item' : 'Edit Item'
       },
-      
       ...mapState({
-          
-        course:(state)=> state.auth.course,
-      })
+     
+      course: (state) => state.auth.course,
+      // levels: (state) => state.auth.levels,
+     
+      
+               }),
     },
 
     watch: {
@@ -212,18 +229,43 @@ export default {
       },
     },
 
-    created () {
-      // this.initialize(),
-      
-      this.actionCourseGet()
+     created () {
+      // this.initialize()
+      this.actionLavelGet()
     },
 
     methods: {
-      ...mapActions([
-        'actionCourseGet'
-      ]),
-     
-     
+    ...mapActions([
+      'actionLavelGet',
+    ]),
+
+     addLevel() {
+      
+        this.$store.dispatch('actionLavel', this.editedItem)
+
+      //   const response = await axios.post("http://localhost:2222/addLevel",
+      //    {
+      //     name: this.editedItem.name,
+      //     type: this.editedItem.type,
+      //     identifier: this.editedItem.identifier
+      //   });
+      //    this.course.push(this.editedItem);
+
+      //   console.log(response);
+      //   this.close();
+      
+      },
+      // async initialize () {
+
+       
+      //   const response = await axios.get("http://localhost:2222/getLevels")
+      //   // console.log(response.data);
+      //   this.levels = response.data.levels;
+      //   // const myval1 = "rajavel";
+      //   // this.levels =' key checking hello'
+      //   this.course = this.levels;
+        
+      // },
 
       editItem (item) {
         this.editedIndex = this.course.indexOf(item)
@@ -258,15 +300,39 @@ export default {
         })
       },
 
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.course[this.editedIndex], this.editedItem)
-        } else {
-          this.course.push(this.editedItem)
-        }
-        this.close()
+       save () {
+        //    const response = await axios.post("http://localhost:2222/addLevel",
+        //  {
+        //   name: this.editedItem.name,
+        //   type: this.editedItem.type,
+        //   identifier: this.editedItem.identifier
+        // });
+
+        // if (this.editedIndex > -1) {
+        //   Object.assign(this.course[this.editedIndex], this.editedItem)
+      
+        // console.log(this.editItem);
+        // } 
+        // else {
+         
+        //   // this.course=this.editedItem
+          
+        // }
+        
+        this.close();
+
+        this.addLevel  ();
       },
-    },
+
+    //   async getlevels() {
+    //    const response = await axios.get("http://localhost:2222/getLevels")
+    //      this.levels = response.data.levels;
+    // },
+
+
+
+
+},
 
 }
 </script>
@@ -274,14 +340,3 @@ export default {
 <style>
 
 </style>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 

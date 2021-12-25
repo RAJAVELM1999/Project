@@ -18,21 +18,25 @@ const actions = {
 
     async actionCourse(context, value) {
 
-        const response = await axios.post("http://localhost:2222/addCourse", {
+        const response = await axios.post("http://localhost:2222/addCourse", value);
 
-            name: value.obj1,
-            description: value.obj2,
-            level: value.obj3,
-            subjects: value.obj4
-        }
 
-            // {
-            //   name: "rajav",
-            //   description: "welcome",
-            //   level:"level1",
-            //   subjects:"subjects1"
-            // },
-        );
+
+        // {
+
+        //     name: value.obj1,
+        //     description: value.obj2,
+        //     level: value.obj3,
+        //     subjects: value.obj4
+        // }
+
+        // {
+        //   name: "rajav",
+        //   description: "welcome",
+        //   level:"level1",
+        //   subjects:"subjects1"
+        // },
+
 
         console.log(response);
 
@@ -90,11 +94,14 @@ const actions = {
     //   }
     // },
     async actionSubjects(context, value) {
-        const response = await axios.post("http://localhost:2222/addSubjects", {
-            displayname: value.obj1,
-            identifier: value.obj2,
 
-        });
+        const response = await axios.post("http://localhost:2222/addSubjects", value);
+
+        // {
+        //     displayname: value.obj1,
+        //     identifier: value.obj2,
+
+        // }
 
         console.log(response);
         context.commit('SUB_POST_MUT', value);
@@ -111,11 +118,8 @@ const actions = {
 
 
     async actionSkills(context, value) {
-        const response = await axios.post("http://localhost:2222/addSkills", {
-            name: value.obj1,
-            description: value.obj2,
 
-        });
+        const response = await axios.post("http://localhost:2222/addSkills", value);
 
         console.log(response);
         context.commit('SKILLS_POST_MUT', value);
