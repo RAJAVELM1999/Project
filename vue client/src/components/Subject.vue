@@ -234,7 +234,7 @@ export default {
         obj2 : this.editedItem.identifier,
         
       })
-        // const response = await axios.post("http://localhost:1111/addSubjects",
+        // const response = await axios.post("http://localhost:2222/addSubjects",
         //  {
         //   displayname: this.editedItem.displayname,
         //   identifier: this.editedItem.identifier
@@ -245,7 +245,7 @@ export default {
         this.close();
       },
       // async initialize () {
-      //   const response = await axios.get("http://localhost:1111/getSubjects")
+      //   const response = await axios.get("http://localhost:2222/getSubjects")
       //   // console.log(response.data);
       //   this.subj = response.data.subjects;
       //   // const myval1 = "rajavel";

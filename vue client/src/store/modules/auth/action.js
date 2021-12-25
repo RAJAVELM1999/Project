@@ -18,13 +18,13 @@ const actions = {
 
     async actionCourse(context, value) {
 
-        const response = await axios.post("http://localhost:1111/addCourse", {
+        const response = await axios.post("http://localhost:2222/addCourse", {
 
-                name: value.obj1,
-                description: value.obj2,
-                level: value.obj3,
-                subjects: value.obj4
-            }
+            name: value.obj1,
+            description: value.obj2,
+            level: value.obj3,
+            subjects: value.obj4
+        }
 
             // {
             //   name: "rajav",
@@ -41,13 +41,13 @@ const actions = {
     },
     async actionCourseGet({ commit }) {
 
-        const response = await axios.get("http://localhost:1111/getCourse")
+        const response = await axios.get("http://localhost:2222/getCourse")
         console.log(response)
         commit('CRS_GET_MUT', response.data.course)
     },
 
     async actionLavel(context, value) {
-        const response = await axios.post("http://localhost:1111/addLevel", value);
+        const response = await axios.post("http://localhost:2222/addLevel", value);
 
         console.log(response);
         context.commit('LEV_POST_MUT', value);
@@ -56,20 +56,20 @@ const actions = {
 
     async actionLavelGet({ commit }) {
 
-        const response = await axios.get("http://localhost:1111/getLevels")
+        const response = await axios.get("http://localhost:2222/getLevels")
 
         commit('LEV_GET_MUT', response.data.levels)
-            // const val=response.data.levels;
-            // console.log(val);
-            // state.desserts.push(val) 
-            // context.commit('LEV_GET_MUT',val);
-            // state.desserts.push({events:val})
-            // const val=response.data.level;
-            // state.desserts.push(val)
-            // state.desserts.push(response.data.levels)
-            // state.desserts.push({response.data.levels})
-            // state.desserts.push({events: response.data.levels})
-            // debugger;
+        // const val=response.data.levels;
+        // console.log(val);
+        // state.desserts.push(val) 
+        // context.commit('LEV_GET_MUT',val);
+        // state.desserts.push({events:val})
+        // const val=response.data.level;
+        // state.desserts.push(val)
+        // state.desserts.push(response.data.levels)
+        // state.desserts.push({response.data.levels})
+        // state.desserts.push({events: response.data.levels})
+
 
         // var rep= response.data.levels;
         // context.commit('LEV_GET_MUT',value(rep));
@@ -80,7 +80,7 @@ const actions = {
 
     // async getUser({commit}) {
     //   try {
-    //       const currentUser = await axios.post("http://localhost:1111/addLevel",{name:'rajavel',type:'new',identifier:'rv'})
+    //       const currentUser = await axios.post("http://localhost:2222/addLevel",{name:'rajavel',type:'new',identifier:'rv'})
     //       console.log(currentUser)
     //       // commit(' LEV_POST_MUT', currentUser)
     //       // return currentUser
@@ -90,7 +90,7 @@ const actions = {
     //   }
     // },
     async actionSubjects(context, value) {
-        const response = await axios.post("http://localhost:1111/addSubjects", {
+        const response = await axios.post("http://localhost:2222/addSubjects", {
             displayname: value.obj1,
             identifier: value.obj2,
 
@@ -102,7 +102,7 @@ const actions = {
     },
     async actionSubjectsGet({ commit }) {
 
-        const response = await axios.get("http://localhost:1111/getSubjects")
+        const response = await axios.get("http://localhost:2222/getSubjects")
 
         commit('SUB_GET_MUT', response.data.subjects)
     },
@@ -111,7 +111,7 @@ const actions = {
 
 
     async actionSkills(context, value) {
-        const response = await axios.post("http://localhost:1111/addSkills", {
+        const response = await axios.post("http://localhost:2222/addSkills", {
             name: value.obj1,
             description: value.obj2,
 
@@ -123,7 +123,7 @@ const actions = {
     },
     async actionSkillsGet({ commit }) {
 
-        const response = await axios.get("http://localhost:1111/getSkills")
+        const response = await axios.get("http://localhost:2222/getSkills")
 
         commit('SKILLS_GET_MUT', response.data.skills)
     },

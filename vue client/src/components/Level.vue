@@ -237,10 +237,10 @@ export default {
     ]),
 
      addLevel() {
-      debugger
+      
         this.$store.dispatch('actionLavel', this.editedItem)
 
-      //   const response = await axios.post("http://localhost:1111/addLevel",
+      //   const response = await axios.post("http://localhost:2222/addLevel",
       //    {
       //     name: this.editedItem.name,
       //     type: this.editedItem.type,
@@ -255,7 +255,7 @@ export default {
       // async initialize () {
 
        
-      //   const response = await axios.get("http://localhost:1111/getLevels")
+      //   const response = await axios.get("http://localhost:2222/getLevels")
       //   // console.log(response.data);
       //   this.levels = response.data.levels;
       //   // const myval1 = "rajavel";
@@ -298,7 +298,7 @@ export default {
       },
 
        save () {
-        //    const response = await axios.post("http://localhost:1111/addLevel",
+        //    const response = await axios.post("http://localhost:2222/addLevel",
         //  {
         //   name: this.editedItem.name,
         //   type: this.editedItem.type,
@@ -311,16 +311,17 @@ export default {
         console.log(this.editItem);
         } 
         else {
-          debugger
-          this.levelget.push(this.editedItem)
+         
+          this.levelget=this.editedItem
         }
+        
         this.close();
 
         this.addLevel();
       },
 
     //   async getlevels() {
-    //    const response = await axios.get("http://localhost:1111/getLevels")
+    //    const response = await axios.get("http://localhost:2222/getLevels")
     //      this.levels = response.data.levels;
     // },
 

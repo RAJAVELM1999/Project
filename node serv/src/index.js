@@ -22,60 +22,60 @@ app.get('/', (req, res) => {
 
 // *** Starting of Course
 
-app.post('/addCourse', async(req, res) => {
-        console.log(req.body);
+app.post('/addCourse', async (req, res) => {
+    console.log(req.body);
 
-        const course = await Course.create({
-            name: req.body.name,
-            description: req.body.description,
-            level: req.body.level,
-            subjects: req.body.subjects,
-        });
-        console.log('addCourse');
+    const course = await Course.create({
+        name: req.body.name,
+        description: req.body.description,
+        level: req.body.level,
+        subjects: req.body.subjects,
+    });
+    console.log('addCourse');
 
-        return res.json(course);
-    })
-    //below for Get => find()=============
+    return res.json(course);
+})
+//below for Get => find()=============
 
-app.get('/getCourse', async(req, res) => {
-        console.log('/getCourse');
-        const course = await Course.find({});
-        console.log(course);
+app.get('/getCourse', async (req, res) => {
+    console.log('/getCourse');
+    const course = await Course.find({});
+    console.log(course);
 
-        return res.json({
-            course: course
-        });
-    })
-    // *** Engind of Course
+    return res.json({
+        course: course
+    });
+})
+// *** Engind of Course
 
-app.get('/updateCourse', async(req, res) => {
-        const course = await Course.find({});
+app.get('/updateCourse', async (req, res) => {
+    const course = await Course.find({});
 
 
 
-        console.log(course);
+    console.log(course);
 
-        return res.json({
-            course: course
-        });
-    })
-    // Below for post => create()=============================================================
+    return res.json({
+        course: course
+    });
+})
+// Below for post => create()=============================================================
 
-app.post('/addLevel', async(req, res) => {
-        console.log(req.body);
+app.post('/addLevel', async (req, res) => {
+    console.log(req.body);
 
-        const level = await Level.create({
-            name: req.body.name,
-            type: req.body.type,
-            identifier: req.body.identifier,
-        });
-        console.log('addLevel');
+    const level = await Level.create({
+        name: req.body.name,
+        type: req.body.type,
+        identifier: req.body.identifier,
+    });
+    console.log('addLevel');
 
-        return res.json(level);
-    })
-    //below for Get => find()====================================================================
+    return res.json(level);
+})
+//below for Get => find()====================================================================
 
-app.get('/getLevels', async(req, res) => {
+app.get('/getLevels', async (req, res) => {
     console.log('/getLevels');
     const levels = await Level.find({});
     console.log(levels);
@@ -87,11 +87,11 @@ app.get('/getLevels', async(req, res) => {
 
 //below for put => FindByIDAndUpdate() / FindOneAndUpdate()========================================
 
-app.put('/getLevels', async(req, res) => {
+app.put('/getLevels', async (req, res) => {
     console.log('Updating Levels');
     const levels = await Level.findOneAndUpdate({ name: "Rajavel" }, { name: "RAJAVEL M" }, { overwrite: false },
-        async(err, doc) =>
-        console.log(doc)
+        async (err, doc) =>
+            console.log(doc)
     )
     return res.json({
         levels: levels
@@ -137,7 +137,7 @@ app.put('/getLevels', async(req, res) => {
 
 
 
-app.get('/getSubjects', async(req, res) => {
+app.get('/getSubjects', async (req, res) => {
     console.log('/getSubjects');
     // Get from Mongo DB
     // const levels = await Level.find({});
@@ -164,7 +164,7 @@ app.get('/getSubjects', async(req, res) => {
     //     ]
     // });
 })
-app.post('/addSubjects', async(req, res) => {
+app.post('/addSubjects', async (req, res) => {
     console.log(req.body);
 
     const subjects = await Subjects.create({
@@ -175,7 +175,7 @@ app.post('/addSubjects', async(req, res) => {
     return res.json(subjects);
 })
 
-app.get('/getSkills', async(req, res) => {
+app.get('/getSkills', async (req, res) => {
     console.log('/getSkills');
     // Get from Mongo DB
     // const levels = await Level.find({});
@@ -187,7 +187,7 @@ app.get('/getSkills', async(req, res) => {
     });
 
 })
-app.post('/addSkills', async(req, res) => {
+app.post('/addSkills', async (req, res) => {
     console.log(req.body);
     const skills = await Skills.create({
         name: req.body.name,
@@ -197,7 +197,7 @@ app.post('/addSkills', async(req, res) => {
     return res.json(skills);
 })
 
-const PORT = 1111;
+const PORT = 2222;
 app.listen(PORT, () => {
     console.log(`Server started in http://localhost:${PORT}`);
 });

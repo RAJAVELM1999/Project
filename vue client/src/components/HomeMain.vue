@@ -132,11 +132,13 @@
                                 
                                 label="Level*"
                                 v-model="clevel"
+                                item-text="name"
+                                item-value="identifier"
                                 
                               ></v-autocomplete>
                             </v-col>
                                <v-col cols="12" sm="8">
-                                 {{itemSubjects}}
+                                 
                               <v-autocomplete
                                 :items="itemSubjects"
                                 label="Subjects*"
@@ -146,14 +148,15 @@
                                 item-value="identifier"
    
                               ></v-autocomplete>
+                              
 <!-- demo purpose start 24.12.2021-->
-                              <v-combobox
+                              <!-- <v-combobox
                                     clearable
                                     hide-selected
                                     :item="items"
                                      
-                                ></v-combobox>
-        <v-select
+                                ></v-combobox> -->
+        <!-- <v-select
           v-model="select"
           
           :items="exmp"
@@ -162,11 +165,11 @@
           persistent-hint
           return-object
           single-line
-        ></v-select>
+        ></v-select> -->
 
 
 <!-- another exmpl -->
-
+<!-- 
 
 
         <v-container fluid>
@@ -191,7 +194,7 @@
         ></v-select>
       </v-col>
     </v-row>
-  </v-container>
+  </v-container> -->
 
 
 <!-- demo purpose end 24.12.2021-->
@@ -324,7 +327,7 @@ export default {
   data () {
 
      return{
-       exmp:[],
+      
       dialog: false,
       select: { state: 'Florida', abbr: 'FL' },
         items: [
@@ -350,12 +353,10 @@ export default {
   methods: {
     ...mapActions(["actionCourseGet","actionLavelGet","actionSubjectsGet"]),
 
-      example(){
-        this.exmp=this.itemLevel
-      },
+      
 
     addCourse() {
-       debugger;
+       
       this.$store.dispatch("actionCourse", {
         // obj0 : this.editedItem,
         obj1: this.cname,

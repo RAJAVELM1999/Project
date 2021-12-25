@@ -4,14 +4,14 @@ const ObjectId = Schema.ObjectId;
 
 const LevelSchem = new Schema({
     name: { type: String },
-    type: { type: String ,index:true},
-    identifier: { type: String, unique:true},
+    type: { type: String, index: true },
+    identifier: { type: String, unique: true },
     // LevelSchem :createIndex({"title":1,"description":-1})
-    
+
 });
 // LevelSchem.index({name:-1});
 
-LevelSchem.index({name: 1});
+LevelSchem.index({ name: 1 });
 
 const Level = mongoose.model('Level', LevelSchem);
 Level.init();

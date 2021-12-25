@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost:27017/Today14dec')
+mongoose.connect('mongodb://localhost:27017/25122021Database')
     .then(() => {
         console.log("Mongoose connected to Db...");
     }).

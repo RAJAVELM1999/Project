@@ -63,9 +63,8 @@ const state = {
 
 
 
-  levelget: [
+  levelget: [],
 
-  ],
   skillsget: [],
 
   subjectsget: [],

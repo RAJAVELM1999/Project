@@ -1,13 +1,18 @@
 
 
 const getters = {
-  todoList: state=>{
+  todoList: state => {
 
-    return state.todoList   
+    return state.todoList
 
   }
-    
-  };
-  
-  module.exports = { getters };
-  
+  // levelget: state => {
+
+  //   return state.levelget
+
+  // }
+
+
+};
+
+module.exports = { getters };

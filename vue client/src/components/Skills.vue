@@ -224,7 +224,7 @@ export default {
         'actionSkillsGet'
       ]),
        addSkills() {
-         debugger;
+        //  debugger;
          this.$store.dispatch('actionSkills',
       { 
         obj0 : this.editedItem,
@@ -232,7 +232,7 @@ export default {
         obj2 : this.editedItem.description,
         
       })
-        // const response = await axios.post("http://localhost:1111/addSkills",
+        // const response = await axios.post("http://localhost:2222/addSkills",
         //  {
         //   name: this.editedItem.name,
         //   description: this.editedItem.description
@@ -243,7 +243,7 @@ export default {
         this.close();
       },
       // async initialize () {
-      //   const response = await axios.get("http://localhost:1111/getSkills");
+      //   const response = await axios.get("http://localhost:2222/getSkills");
       //   this.skillsget = response.data.skillls;
       // },
 

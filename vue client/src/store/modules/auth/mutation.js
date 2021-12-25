@@ -44,7 +44,7 @@ const mutations = {
   },
 
   LEV_POST_MUT(state, value) {
-    state.levelget = value
+    state.levelget = value.data
     // state.desserts.push({value:value})
   },
 
